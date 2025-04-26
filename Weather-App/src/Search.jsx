@@ -25,6 +25,7 @@ export default function Search({Upd}) {
     };
 
     async function response(city){
+        try{
 
         let res=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_ID}&units=metric`)
         let result=await res.json()
@@ -38,6 +39,18 @@ export default function Search({Upd}) {
         }
         console.log(result)
         Upd(Weather)
+    }
+    catch(error){
+        let Weather={
+            temp:"",
+            humidity:"",
+            city:"City dont exist in api",
+            temp_max:"",
+            temp_min:"",
+            discription:""
+        }
+        Upd(Weather)
+    }
 
     }
     
